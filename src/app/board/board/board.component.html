@@ -1,0 +1,44 @@
+<div class="container-fluid">
+  <div cdkDropListGroup class="mx-5 row">
+    <div *ngFor="let column of boardService.board" class="col-sm-3">
+
+      <div class="d-flex justify-content-between align-items-center p-2 shadow-sm column-header">
+        <h2 class="m-0">{{column.title}}</h2>
+        <button mat-icon-button class="icon-delete" (click)="onDeleteColumn(column.id)">
+          <mat-icon style="font-size: 20px;">delete</mat-icon>
+        </button>
+      </div>
+
+      <app-dialog (emitText)="onAddTask($event, column.id)" [question]="'Add new task in ' + column.title + ' column'">
+        <button mat-raised-button class="w-100 mb-1 btn-add">Add New Task</button>
+      </app-dialog>
+
+      <div
+        cdkDropList
+        [cdkDropListData]="column.list"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          cdkDrag
+          class="example-box"
+          *ngFor="let task of column.list"
+        >
+          <app-board-item
+            [task]="task"
+            (emitText)="onAddComment($event, column.id)"
+            (emitTask)="onChangeLike($event, column.id)"
+            (emitDeleteTask)="onDeleteTask($event, column.id)"
+          >
+            <div *ngFor="let comment of task.comments">
+              <app-comment-item
+                [comment]="comment"
+                (emitComment)="onDeleteComment($event, column.id, task.id)"
+              ></app-comment-item>
+            </div>
+          </app-board-item>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
