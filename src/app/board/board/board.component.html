@@ -1,10 +1,10 @@
 <div class="container-fluid">
   <div cdkDropListGroup class="mx-5 row">
-    <div *ngFor="let column of boardService.board" class="col-sm-3">
+    <div *ngFor="let column of boardService.getBoard$() | async" class="col-sm-3">
 
       <div class="d-flex justify-content-between align-items-center p-2 shadow-sm column-header">
         <h2 class="m-0">{{column.title}}</h2>
-        <button mat-icon-button class="icon-delete" (click)="onDeleteColumn(column.id)">
+        <button mat-icon-button class="icon-delete" (click)="onDeleteColumn(column)">
           <mat-icon style="font-size: 20px;">delete</mat-icon>
         </button>
       </div>

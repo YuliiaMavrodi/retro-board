@@ -10,9 +10,9 @@ import {Column, Task} from "../../models/column.model";
 export class BoardItemComponent implements OnInit {
 
   @Input() task: any
-  @Output() emitText: EventEmitter<{ id: number, text: string }> = new EventEmitter()
+  @Output() emitText: EventEmitter<{ id: string, text: string }> = new EventEmitter()
   @Output() emitTask: EventEmitter<{ task: Task, increase: boolean }> = new EventEmitter()
-  @Output() emitDeleteTask: EventEmitter<number> = new EventEmitter()
+  @Output() emitDeleteTask: EventEmitter<string> = new EventEmitter()
 
   commentInput = ''
   open = false
@@ -26,7 +26,7 @@ export class BoardItemComponent implements OnInit {
     this.open = !this.open
   }
 
-  onCommentTextEmit(id: number) {
+  onCommentTextEmit(id: string) {
     this.emitText.emit({ id, text: this.commentInput })
     this.commentInput = ''
   }
@@ -35,7 +35,7 @@ export class BoardItemComponent implements OnInit {
     this.emitTask.emit({task, increase})
   }
 
-  onTaskDelete(id: number) {
+  onTaskDelete(id: string) {
     this.emitDeleteTask.emit(id)
   }
 }

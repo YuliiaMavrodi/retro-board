@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     public boardService: BoardService,
     private auth: AngularFireAuth,
-    private router: Router
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -24,6 +24,7 @@ export class HeaderComponent implements OnInit {
       this.boardService.addColumn(title)
     }
   }
+
 
   onLogout() {
     this.auth.signOut().then(() => this.router.navigate(['login']))

@@ -1,17 +1,17 @@
 export interface Comment {
-  id: number,
+  id: string,
   text: string
 }
 
 export interface Task {
-  id: number,
+  id: string,
   text: string,
   like: number,
   comments: Comment[]
 }
 
 export interface Column {
-  id: number,
+  id: string,
   title: string,
   list: Task[]
 }
