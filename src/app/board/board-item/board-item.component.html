@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-between align-items-start mb-2">
   <div class="mt-1">{{ task.text }}</div>
-  <button mat-icon-button class="icon-delete" (click)="onTaskDelete(task.id)">
+  <button mat-icon-button class="icon-delete" (click)="onTaskDelete(task.$id)">
     <mat-icon style="font-size: 18px;">delete</mat-icon>
   </button>
 </div>
@@ -30,7 +30,7 @@
       mat-icon-button
       color="primary"
       class="icon-confirm"
-      (click)="onCommentTextEmit(task.id)"
+      (click)="onCommentTextEmit(task.$id)"
     >
       <mat-icon>done</mat-icon>
     </button>

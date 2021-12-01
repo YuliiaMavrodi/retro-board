@@ -47,3 +47,15 @@
 .column-header {
   border: 1px solid rgb(207, 207, 207);
 }
+
+.no-data {
+  margin: 25px 0 15px;
+  font-size: 28px;
+  color: #a9a6c5;
+  font-weight: 300;
+  letter-spacing: .2px;
+}
+
+.nodata-msg, .h2, h2 {
+  font-size: 1.4rem;
+}

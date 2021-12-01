@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {BoardComponent} from "../board/board.component";
-import {Column, Task} from "../../models/column.model";
+import {Task} from "../../models/column.model";
+import {BoardService} from "../../services/board.service";
 
 @Component({
   selector: 'app-board-item',
@@ -17,9 +17,13 @@ export class BoardItemComponent implements OnInit {
   commentInput = ''
   open = false
 
-  constructor() { }
+  constructor(
+    public boardService: BoardService
+  ) {
+  }
 
   ngOnInit(): void {
+
   }
 
   onOpenComment() {
@@ -27,7 +31,7 @@ export class BoardItemComponent implements OnInit {
   }
 
   onCommentTextEmit(id: string) {
-    this.emitText.emit({ id, text: this.commentInput })
+    this.emitText.emit({id, text: this.commentInput})
     this.commentInput = ''
   }
 

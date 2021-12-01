@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {BoardService} from "../../services/board.service";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {Router} from "@angular/router";
+import {ExcelService} from "../../services/excel.service";
+import {TutorialService} from "../../services/tutorial.service";
 
 @Component({
   selector: 'app-header',
@@ -12,23 +14,29 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     public boardService: BoardService,
+    public tutorialService: TutorialService,
+    public excelService: ExcelService,
     private auth: AngularFireAuth,
-    private router: Router,
-  ) { }
-
+    private router: Router
+  ) {
+  }
   ngOnInit(): void {
   }
 
   addColumn(title: string) {
-    if(title) {
+    if (title) {
       this.boardService.addColumn(title)
     }
   }
 
-
   onLogout() {
     this.auth.signOut().then(() => this.router.navigate(['login']))
   }
+
+  onExportExcel(): void {
+    this.excelService.exportExcel();
+  }
+
 
 
 }

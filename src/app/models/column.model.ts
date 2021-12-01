@@ -4,14 +4,14 @@ export interface Comment {
 }
 
 export interface Task {
-  id: string,
+  $id: string,
   text: string,
   like: number,
   comments: Comment[]
 }
 
 export interface Column {
-  id: string,
+  $id: string,
   title: string,
   list: Task[]
 }

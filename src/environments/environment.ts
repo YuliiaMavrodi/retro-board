@@ -15,6 +15,7 @@ export const environment = {
   firebaseConfig: {
     apiKey: "AIzaSyCa6WSLrBArUaoUZ0nRRLRh4Lq0UP4jcdA",
     authDomain: "retro-board-bb6b9.firebaseapp.com",
+    databaseURL: "https://retro-board-bb6b9-default-rtdb.firebaseio.com",
     projectId: "retro-board-bb6b9",
     storageBucket: "retro-board-bb6b9.appspot.com",
     messagingSenderId: "70809717067",
