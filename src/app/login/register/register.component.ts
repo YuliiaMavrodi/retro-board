@@ -24,7 +24,6 @@ export class RegisterComponent implements OnInit {
   createUser() {
     const {email, password} = this.registerForm.value
     this.auth.createUserWithEmailAndPassword(email, password). then((user => {
-      console.log('User', user)
       this.router.navigate([''])
     }))
   }

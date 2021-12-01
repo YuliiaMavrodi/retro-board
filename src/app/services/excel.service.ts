@@ -23,7 +23,6 @@ export class ExcelService {
   addRow(worksheet: any, data: any): void {
     for (let x1 of data) {
       if(typeof Object.values(x1) === 'object') {
-        console.log(Object.values(x1))
       }
       let x2 = Object.keys(x1);
       let temp = []

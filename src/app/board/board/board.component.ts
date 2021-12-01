@@ -32,7 +32,6 @@ export class BoardComponent implements OnInit {
         this.taskState(a as Column)
         // }
       })
-      console.log(this.boardService.board)
     })
 
   }
@@ -111,7 +110,6 @@ export class BoardComponent implements OnInit {
       let comment = this.boardService.getTasksComment(column.$id, task.$id);
       comment.snapshotChanges().subscribe(data => {
         task.comments = []
-        console.log('task', task)
         data.forEach(item => {
           let a = item.payload.toJSON();
           // @ts-ignore

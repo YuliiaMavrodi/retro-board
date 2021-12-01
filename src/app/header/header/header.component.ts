@@ -34,29 +34,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onExportExcel(): void {
-    const json = [
-      {
-        "id": 1,
-        "name": "Viki",
-        "surname": "Dracula",
-        "age": 21
-      },
-      {
-        "id": 2,
-        "name": "Rob",
-        "surname": "Zombie",
-        "age": 12
-      },
-      {
-        "id": 3,
-        "name": "Super",
-        "surname": "Man",
-        "age": 38
-      }
-    ]
-    this.excelExportService.exportAsExcelFile(json, 'portaUpload');
-    // console.log(this.boardService.board)
-
+    this.excelExportService.exportAsExcelFile( );
   }
 
 
