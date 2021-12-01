@@ -1,8 +1,7 @@
-import {Component, OnChanges, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {BoardService} from "../../services/board.service";
 import {Column, Comment, Task} from "../../models/column.model";
-import {TutorialService} from 'src/app/services/tutorial.service';
 
 @Component({
   selector: 'app-board',
@@ -68,7 +67,6 @@ export class BoardComponent implements OnInit {
   commentState(column: Column, task: Task) {
     let comment = this.boardService.getTasksComment(column.$id, task.$id);
     comment.snapshotChanges().subscribe(data => {
-      // task.comments = []
       data.forEach(item => {
         let a = item.payload.toJSON();
         // @ts-ignore
@@ -85,7 +83,7 @@ export class BoardComponent implements OnInit {
     } else {
       const task = event.previousContainer.data[event.previousIndex];
       this.boardService.deleteTask(task.$id, event.previousContainer.id)
-      this.boardService.addTask(task.text, event.container.id)
+      this.boardService.addTask(task.text, event.container.id, task.like, task.comments)
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
@@ -96,8 +94,15 @@ export class BoardComponent implements OnInit {
   }
 
   onChangeLike(event: { task: Task, increase: boolean }, column: Column) {
-    const {task: {$id}, increase} = event
-    this.boardService.changeLike(column.$id, $id, increase)
+    const {task, increase} = event
+
+    if (increase) {
+      task.like++
+    } else if (task.like > 0) {
+      task.like--
+    }
+
+    this.boardService.changeLike(column.$id, task, increase,)
 
   }
 
@@ -111,9 +116,7 @@ export class BoardComponent implements OnInit {
           let a = item.payload.toJSON();
           // @ts-ignore
           a['id'] = item.key;
-          // column.list.push(a as Task);
           task.comments = [a as Comment, ...task.comments]
-          // this.boardService.board$.next([...this.boardService.board])
         })
       })
 

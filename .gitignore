@@ -49,3 +49,6 @@ Thumbs.db
 .firebase
 *-debug.log
 .runtimeconfig.json
+
+/src/app/services/excel-export.service.ts
+/src/app/services/excel.service.ts

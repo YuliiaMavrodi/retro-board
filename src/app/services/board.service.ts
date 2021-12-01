@@ -19,10 +19,6 @@ export class BoardService {
   constructor(private db: AngularFireDatabase) {
   }
 
-
-
-
-
   columnsRef!: AngularFireList<any>;
   columnRef!: AngularFireObject<any>;
 
@@ -33,8 +29,6 @@ export class BoardService {
 
   commentsRef!: AngularFireList<any>;
   commentRef!: AngularFireObject<any>;
-
-  comments$ = new BehaviorSubject<Comment[]>([])
 
   addColumn(title: string) {
     this.columnsRef.push({title: title, list: this.tasks$})
@@ -65,12 +59,12 @@ export class BoardService {
     this.columnRef.remove();
   }
 
-  addTask(text: string, columnId: string) {
+  addTask(text: string, columnId: string, like: number = 0, comments: Comment[] = []) {
     this.tasksRef = this.db.list('board-list/' + columnId + '/list');
     this.tasksRef.push({
       text,
-      like: 0,
-      comments: this.comments$
+      like,
+      comments
     })
   }
 
@@ -80,28 +74,10 @@ export class BoardService {
   }
 
 
-  changeLike(columnId: string, taskId: string, increase: boolean) {
-    let taskLikes
-    this.board = this.board.map((column: Column) => {
-      if (column.$id === columnId) {
-        const list = column.list.map((task: Task) => {
-          if (task.$id === taskId) {
-            if (increase) {
-              taskLikes = task.like++
-            } else if (task.like > 0) {
-              taskLikes = task.like--
-            }
-          }
-          return task
-        })
-        column.list = list
-      }
-      return column
-    })
-
-    this.taskRef = this.db.object('board-list/' + columnId + '/list/' + taskId);
+  changeLike(columnId: string, task: Task, increase: boolean) {
+    this.taskRef = this.db.object('board-list/' + columnId + '/list/' + task.$id);
     this.taskRef.update({
-      like: taskLikes
+      like: task.like
     })
   }
 

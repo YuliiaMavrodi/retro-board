@@ -3,7 +3,7 @@ import {BoardService} from "../../services/board.service";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {Router} from "@angular/router";
 import {ExcelService} from "../../services/excel.service";
-import {TutorialService} from "../../services/tutorial.service";
+import {ExcelExportService} from "../../services/excel-export.service";
 
 @Component({
   selector: 'app-header',
@@ -14,8 +14,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     public boardService: BoardService,
-    public tutorialService: TutorialService,
     public excelService: ExcelService,
+    public excelExportService: ExcelExportService,
     private auth: AngularFireAuth,
     private router: Router
   ) {
@@ -34,9 +34,30 @@ export class HeaderComponent implements OnInit {
   }
 
   onExportExcel(): void {
-    this.excelService.exportExcel();
-  }
+    const json = [
+      {
+        "id": 1,
+        "name": "Viki",
+        "surname": "Dracula",
+        "age": 21
+      },
+      {
+        "id": 2,
+        "name": "Rob",
+        "surname": "Zombie",
+        "age": 12
+      },
+      {
+        "id": 3,
+        "name": "Super",
+        "surname": "Man",
+        "age": 38
+      }
+    ]
+    this.excelExportService.exportAsExcelFile(json, 'portaUpload');
+    // console.log(this.boardService.board)
 
+  }
 
 
 }
