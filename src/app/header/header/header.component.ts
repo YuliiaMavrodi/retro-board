@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {BoardService} from "../../services/board.service";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {Router} from "@angular/router";
-import {ExcelService} from "../../services/excel.service";
 import {ExcelExportService} from "../../services/excel-export.service";
 
 @Component({
@@ -14,7 +13,6 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     public boardService: BoardService,
-    public excelService: ExcelService,
     public excelExportService: ExcelExportService,
     private auth: AngularFireAuth,
     private router: Router
